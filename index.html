@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ★★★ SEO 核心：标题和描述由 JS 根据当前页面动态更新 ★★★ -->
+    <title>测评导航 — 知识付费课程测评 · 帮你选对课</title>
+    <meta name="description" content="Python入门课、考研数学、副业课程深度横评，8大维度逐帧拆解，免费阅读核心结论，付费下载完整报告。帮你避开营销陷阱，只选最适合的那一门。">
+    <meta name="keywords" content="Python入门课测评,考研数学老师推荐,副业课程避坑,知识付费测评,课程对比,网课推荐,自学路线,课程红黑榜">
+    <!-- Open Graph（分享到微信/QQ时显示的卡片） -->
+    <meta property="og:title" content="测评导航 — 知识付费课程测评 · 帮你选对课">
+    <meta property="og:description" content="Python入门、考研数学、副业课程深度横评，免费阅读核心结论，付费下载完整报告。">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <!-- 禁止搜索引擎索引管理后台 -->
+    <meta name="robots" content="index, follow">
+    <!-- 移动端适配 -->
+    <link rel="canonical" href="https://你的域名.com/">
+    <style>
+        /* ============================================================
+           CSS 变量 & 全局样式
+           ============================================================ */
+        :root {
+            --primary: #2563eb;        /* 主色 - 蓝色，传递信任感 */
+            --primary-dark: #1d4ed8;   /* 深蓝 - hover 状态 */
+            --gold: #f59e0b;           /* 金色 - 付费/高级标识 */
+            --gold-bg: #fffbeb;        /* 浅金背景 */
+            --bg: #f8fafc;             /* 页面背景 */
+            --card: #ffffff;           /* 卡片背景 */
+            --text: #1e293b;           /* 主文字 */
+            --text-light: #64748b;     /* 辅助文字 */
+            --border: #e2e8f0;         /* 边框 */
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --radius: 12px;
+            --max-width: 720px;        /* 最大宽度，保证阅读体验 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                         "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================================
+           布局容器
+           ============================================================ */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* ============================================================
+           顶部导航栏
+           ============================================================ */
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .navbar .logo-icon { font-size: 22px; }
+        .nav-links { display: flex; gap: 16px; align-items: center; }
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-purchase-badge {
+            background: var(--primary);
+            color: #fff !important;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px !important;
+            position: relative;
+        }
+        .nav-purchase-badge .count {
+            background: #ef4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px; height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            margin-left: 2px;
+        }
+
+        /* ============================================================
+           首页 Hero
+           ============================================================ */
+        .hero {
+            text-align: center;
+            padding: 40px 16px 32px;
+        }
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .hero .subtitle {
+            font-size: 15px;
+            color: var(--text-light);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .hero .tag-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .hero .tag {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           测评卡片列表
+           ============================================================ */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-bottom: 40px;
+        }
+        .review-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        .review-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .review-card .category {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+            background: #eff6ff;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .review-card .category.hot {
+            color: #dc2626;
+            background: #fef2f2;
+        }
+        .review-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .review-card .desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .review-card .meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .review-card .meta .price {
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 15px;
+        }
+        .review-card .meta .free-tag {
+            background: #f0fdf4;
+            color: #16a34a;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .review-card .arrow {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #cbd5e1;
+        }
+
+        /* ============================================================
+           详情页
+           ============================================================ */
+        .detail-page { display: none; padding-bottom: 60px; }
+        .detail-page.active { display: block; }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin: 16px 0;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .back-btn:hover { text-decoration: underline; }
+
+        .article-header { margin-bottom: 24px; }
+        .article-header .category-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            background: #eff6ff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .article-header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .article-header .article-meta {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* 免费内容区 */
+        .free-content {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            line-height: 1.8;
+        }
+        .free-content h2 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: var(--text);
+        }
+        .free-content h2:first-child { margin-top: 0; }
+        .free-content h3 {
+            font-size: 16px;
+            margin: 16px 0 8px;
+            color: var(--text);
+        }
+        .free-content p { margin-bottom: 12px; font-size: 15px; }
+        .free-content ul, .free-content ol {
+            margin: 8px 0 16px 20px;
+        }
+        .free-content li { margin-bottom: 6px; font-size: 14px; }
+        .free-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+            display: block;
+            overflow-x: auto;
+        }
+        .free-content table th,
+        .free-content table td {
+            border: 1px solid var(--border);
+            padding: 8px 10px;
+            text-align: left;
+        }
+        .free-content table th {
+            background: #f8fafc;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .free-content blockquote {
+            border-left: 3px solid var(--primary);
+            padding: 8px 16px;
+            margin: 16px 0;
+            background: #f8fafc;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        .free-content strong { color: var(--text); }
+        .free-content .highlight-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        /* ============================================================
+           付费墙（Paywall）
+           ============================================================ */
+        .paywall {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .paywall::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+        }
+        .paywall > * { position: relative; z-index: 1; }
+        .paywall .lock-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+        .paywall h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .paywall .paywall-desc {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        .paywall .paywall-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 12px 0 4px;
+        }
+        .paywall .paywall-price small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #94a3b8;
+        }
+        .paywall .paywall-guarantee {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+        .paywall .btn-buy {
+            display: inline-block;
+            background: var(--gold);
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+        .paywall .btn-buy:hover {
+            background: #fbbf24;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+        }
+        .paywall .paywall-features {
+            list-style: none;
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+        .paywall .paywall-features li {
+            font-size: 13px;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .paywall .paywall-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        /* ============================================================
+           支付弹窗
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .modal .close-btn {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        .modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .modal .product-name {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+        .modal .form-group {
+            margin-bottom: 14px;
+        }
+        .modal .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        .modal .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        .modal .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+        .modal .btn-pay {
+            width: 100%;
+            padding: 12px;
+            background: var(--gold);
+            color: #1e293b;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+        .modal .btn-pay:hover { background: #fbbf24; }
+        .modal .demo-notice {
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+        /* 支付方式切换 */
+        .payment-methods {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .payment-methods .pm-btn {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.15s;
+        }
+        .payment-methods .pm-btn.active {
+            border-color: var(--primary);
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        /* ============================================================
+           下载页面
+           ============================================================ */
+        .download-page { display: none; padding-bottom: 40px; }
+        .download-page.active { display: block; }
+
+        .download-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .download-card .success-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+        }
+        .download-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .download-card .download-info {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        .download-card .btn-download {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+        }
+        .download-card .btn-download:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        .download-card .download-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .download-card .download-link-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: left;
+        }
+        .download-card .download-link-item .file-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .download-card .download-link-item .file-icon {
+            font-size: 24px;
+        }
+        .download-card .download-link-item .btn-dl {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* 已购买列表 */
+        .purchases-page { display: none; padding-bottom: 40px; }
+        .purchases-page.active { display: block; }
+        .purchases-page h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .purchase-item {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .purchase-item .pi-info h4 {
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        .purchase-item .pi-info .pi-date {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        .purchase-item .btn-dl-small {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+        .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+
+        /* ============================================================
+           页脚
+           ============================================================ */
+        .footer {
+            text-align: center;
+            padding: 24px 16px 40px;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+        .footer a { color: var(--primary); text-decoration: none; }
+
+        /* ============================================================
+           首页列表（隐藏/显示切换）
+           ============================================================ */
+        .home-page { display: block; }
+        .home-page.hidden { display: none; }
+
+        /* Toast 提示 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; }
+
+        /* 响应式：稍大一点的屏幕 */
+        @media (min-width: 640px) {
+            .hero h1 { font-size: 30px; }
+            .article-header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     导航栏
+     ============================================================ -->
+<nav class="navbar">
+    <div class="container">
+        <a href="#home" class="logo" onclick="navigateTo('home')">
+            <span class="logo-icon">📋</span> 测评导航
+        </a>
+        <div class="nav-links">
+            <a href="#home" onclick="navigateTo('home')">首页</a>
+            <a href="#purchases" class="nav-purchase-badge" onclick="navigateTo('purchases')">
+                📦 我的订单 <span class="count" id="purchase-count">0</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================
+     主内容区
+     ============================================================ -->
+<div class="container" id="app">
+
+    <!-- ==================== 首页 ==================== -->
+    <div class="home-page" id="home-page">
+        <div class="hero">
+            <h1>📊 知识付费课程测评</h1>
+            <p class="subtitle">深度横评热门课程，帮你避开营销陷阱，只选最适合你的那一门</p>
+            <div class="tag-row">
+                <span class="tag">真实学完再测评</span>
+                <span class="tag">多维度对比</span>
+                <span class="tag">不含广告</span>
+                <span class="tag">自动发货</span>
+            </div>
+        </div>
+
+        <div class="review-list" id="review-list">
+            <!-- 测评卡片由 JS 动态渲染 -->
+        </div>
+    </div>
+
+    <!-- ==================== 详情页 ==================== -->
+    <div class="detail-page" id="detail-page"></div>
+
+    <!-- ==================== 下载页 ==================== -->
+    <div class="download-page" id="download-page"></div>
+
+    <!-- ==================== 已购买列表页 ==================== -->
+    <div class="purchases-page" id="purchases-page"></div>
+
+</div>
+
+<!-- ============================================================
+     支付弹窗（全局，按需弹出）
+     ============================================================ -->
+<div class="modal-overlay" id="payment-modal">
+    <div class="modal">
+        <button class="close-btn" onclick="closePaymentModal()">✕</button>
+        <h3>📱 扫码支付</h3>
+        <p class="product-name" id="modal-product-name"></p>
+
+        <!-- 演示模式 -->
+        <div id="demo-mode-section" style="display:none;">
+            <div class="form-group">
+                <label>📧 邮箱地址</label>
+                <input type="email" id="demo-email" placeholder="your@email.com">
+            </div>
+            <button class="btn-pay" onclick="handleDemoPayment()">
+                🧪 模拟支付 · 立即开通
+            </button>
+            <p class="demo-notice">演示模式：点击即完成，无需付款</p>
+        </div>
+
+        <!-- 收款码模式 -->
+        <div id="qrcode-mode-section">
+            <div class="qr-tabs">
+                <button class="qr-tab active" id="tab-wechat" onclick="switchQR('wechat')">💚 微信支付</button>
+                <button class="qr-tab" id="tab-alipay" onclick="switchQR('alipay')">💰 支付宝</button>
+            </div>
+            <div class="qr-section">
+                <div class="qr-amount">¥<span id="modal-price">29.9</span></div>
+                <img id="qr-image" src="" alt="收款码" style="width:200px;height:200px;">
+                <p style="font-size:12px;color:#94a3b8;margin-top:4px;">请保存二维码到手机，用对应App扫码支付</p>
+            </div>
+            <div class="qr-instructions">
+                <strong>📌 付款步骤：</strong><br>
+                1. 截图或长按保存收款码<br>
+                2. 打开微信/支付宝扫一扫<br>
+                3. 输入上方金额 <strong>¥<span id="modal-price-2">29.9</span></strong><br>
+                4. 完成付款后，<strong>复制交易单号</strong>填到下方
+            </div>
+            <div class="form-group">
+                <label>📧 你的邮箱</label>
+                <input type="email" id="pay-email" placeholder="your@email.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>📋 交易单号（微信/支付宝付款记录里的单号）</label>
+                <input type="text" id="txn-ref" placeholder="选填：如 20250709...">
+            </div>
+            <button class="btn-submit-order" onclick="handlePayment()">
+                ✅ 我已完成付款，提交订单
+            </button>
+            <p class="demo-notice">
+                提交后管理员会核对到账并确认发货，下载链接将发送到你的邮箱
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- 页脚 -->
+<div class="footer">
+    <p>© 2025 测评导航 · 独立测评，不含广告推广</p>
+    <p>如有疑问请联系：<a href="mailto:support@example.com">support@example.com</a></p>
+    <p style="margin-top: 8px; color: #94a3b8;">
+        本站所有测评内容基于真实学习体验，付费报告自动发货，30天无理由退款
+    </p>
+</div>
+
+<!-- ============================================================
+     JavaScript - 核心逻辑
+     ============================================================ -->
+<script>
+(function() {
+    "use strict";
+
+    /* ============================================================
+       配置区 —— 修改这里来定制你的网站
+       ============================================================
+       CONFIG.paymentMode:
+         "demo"   - 演示模式，点击即支付成功（适合测试）
+         "alipay" - 支付宝（需要后端配合）
+         "wechat" - 微信支付（需要后端配合）
+         "manual" - 手动确认模式（用户付款后你手动开通）
+       ============================================================ */
+    const CONFIG = {
+        // ★ 支付模式：
+        //   "demo"    - 演示模式（点击即购买）
+        //   "qrcode"  - 收款码模式（钱直接到你微信/支付宝，手动确认后发货）
+        paymentMode: "qrcode",
+
+        // ★ 网站名称
+        siteName: "测评导航",
+
+        // ★ 联系邮箱
+        contactEmail: "3768570841@qq.com",
+
+        // ★★★ Worker API 地址（部署 self-hosted/worker.js 后获得）★★★
+        workerUrl: "https://你的worker.workers.dev",
+
+        // ★★★ 管理员密码（访问 #admin 管理后台用）★★★
+        adminPassword: "cyc20051111CYC",
+
+        // ★★★ 收款码图片路径（把图片放到网站同目录）★★★
+        qrcodeWechat: "./qrcode-wechat.png",
+        qrcodeAlipay: "./qrcode-alipay.png",
+        qrcodeDefault: "wechat",
+
+        // 30天无理由退款
+        refundDays: 30,
+    };
+    /* ============================================================
+       测评数据 —— 修改这里来添加/修改测评内容
+       每个测评对象包含：
+         id           唯一标识（用于路由和存储）
+         title        测评标题
+         category     分类标签
+         hot          是否热门（显示红色标签）
+         desc         简短描述（首页卡片显示）
+         price        付费报告价格（元）
+         date         发布日期
+         keywords     搜索关键词（SEO用）
+         freeContent  免费内容（HTML字符串）
+         premiumFiles 付费文件列表 [{name, icon, type, size}]
+         downloads    每个文件对应的下载内容生成函数
+       ============================================================ */
+    const REVIEWS = [
+        {
+            id: "python-intro-2025",
+            title: "Python 入门课横评：夜曲编程 vs 风变编程 vs 扇贝编程 vs B站免费课",
+            category: "编程课程",
+            hot: true,
+            desc: "4 大主流 Python 入门平台深度对比，从教学逻辑、练习体系、答疑社群到隐藏成本，帮你选出最适合零基础的那一门",
+            price: 29.9,
+            date: "2025-07-01",
+            keywords: "Python入门课推荐,Python自学选哪个,风变编程怎么样,夜曲编程值得买吗",
+            // ========== 免费内容（HTML） ==========
+            freeContent: `
+                <p style="font-size:14px;color:#64748b;margin-bottom:20px;">
+                    ⬆️ 以下为<strong>免费阅读</strong>部分。文末有完整报告的付费下载入口。
+                </p>
+
+                <h2>一、测评背景</h2>
+                <p>截至2025年中，国内面向零基础的 Python 入门课超过 30 家，价格从 0 元到 8000+ 元不等。这些课程的营销话术高度相似（"零基础轻松学会""学完接单赚钱"），但课程质量、教学逻辑、售后体验天差地别。</p>
+                <p>这篇测评的目标只有一个：<strong>帮你省掉那一两千块试错成本。</strong></p>
+
+                <h2>二、5 大测评维度</h2>
+                <table>
+                    <tr><th>维度</th><th>权重</th><th>核心问题</th></tr>
+                    <tr><td>① 教学逻辑</td><td>★★★★★</td><td>"理论先行"还是"项目驱动"？零基础能不能跟上？</td></tr>
+                    <tr><td>② 练习体系</td><td>★★★★★</td><td>有没有在线编程环境？练习题够不够？做错了有人告诉你吗？</td></tr>
+                    <tr><td>③ 答疑社群</td><td>★★★★</td><td>卡住的时候，有没有人能帮你？响应速度多快？</td></tr>
+                    <tr><td>④ 内容深度</td><td>★★★★</td><td>学完能到什么程度？能独立写爬虫吗？能接单吗？</td></tr>
+                    <tr><td>⑤ 性价比</td><td>★★★</td><td>同样效果，有没有更便宜的替代方案？</td></tr>
+                </table>
+
+                <h2>三、核心结论速览</h2>
+                <table>
+                    <tr><th>排名</th><th>平台</th><th>最适合谁</th><th>价格</th></tr>
+                    <tr><td>🥇</td><td><strong>风变编程</strong></td><td>想转行、愿意投入的零基础</td><td>¥1,298</td></tr>
+                    <tr><td>🥈</td><td><strong>夜曲编程</strong></td><td>纯小白试水、不确定是否要学</td><td>¥499</td></tr>
+                    <tr><td>🥉</td><td><strong>扇贝编程</strong></td><td>学生党、喜欢打卡机制</td><td>¥799</td></tr>
+                    <tr><td>🏅</td><td><strong>B站免费课</strong></td><td>极度自律、预算为零</td><td>¥0</td></tr>
+                </table>
+
+                <div class="highlight-box">
+                    <strong>⚡ 快速决策：</strong>预算 ¥1,000+ 选风变，预算 ¥500 选夜曲，预算 ¥0 + 自律选B站。<br>
+                    完整报告含<strong>8大维度逐帧拆解、隐藏成本曝光、真实完课率数据、学后变现路径</strong>。
+                </div>
+
+                <h2>四、各平台简评</h2>
+                <h3>🥇 风变编程 — 综合最优选</h3>
+                <p>对话式教学的标杆产品。内容覆盖最全：基础语法→函数→面向对象→爬虫→数据分析→自动化办公→Web基础。学完能独立写爬虫、做数据报表。¥1,298买断制，横向对比线下培训班同等内容要 8,000-15,000。</p>
+
+                <h3>🥈 夜曲编程 — 最友好的入门体验</h3>
+                <p>把 Python 概念拆成"知识卡片"，每张配 3-5 道练习题。对零基础极度友好。但基础课只讲到函数，进阶课需另购 ¥899，总计 ¥1,398。</p>
+
+                <h3>🥉 扇贝编程 — 中规中矩的中间选手</h3>
+                <p>把英语学习的"每日打卡"搬到编程课上，节奏感好。但课程拆分销售，三件套买满 ¥1,598，比风变更贵但内容更少。</p>
+
+                <h3>🏅 B站免费课 — 零成本，高门槛</h3>
+                <p>推荐黑马程序员系列。课程免费但环境配置是第一道鬼门关，弃课率高达 91%。极度自律者可选。</p>
+            `,
+            // ========== 付费文件列表 ==========
+            premiumFiles: [
+                {
+                    name: "Python入门课8大维度完整测评报告",
+                    icon: "📄",
+                    type: "PDF",
+                    size: "12.8 MB",
+                    desc: "含隐藏成本曝光、真实完课率数据、学后变现路径分析"
+                },
+                {
+                    name: "4家课程大纲643条逐章对比表",
+                    icon: "📊",
+                    type: "Excel",
+                    size: "2.4 MB",
+                    desc: "谁讲了什么、谁没讲什么，一目了然"
+                },
+                {
+                    name: "Python环境配置零失败指南",
+                    icon: "🛠️",
+                    type: "PDF",
+                    size: "5.1 MB",
+                    desc: "Win/Mac/Linux全覆盖，含17个常见报错解决方案"
+                },
+                {
+                    name: "12周Python自学路线图",
+                    icon: "🗺️",
+                    type: "PDF",
+                    size: "3.2 MB",
+                    desc: "精确到每天学什么、练什么、产出什么"
+                },
+                {
+                    name: "5个接单级实战项目源码+视频",
+                    icon: "💻",
+                    type: "ZIP",
+                    size: "89.5 MB",
+                    desc: "豆瓣爬虫、Excel批处理、微信机器人、PDF生成器、数据大屏"
+                },
+                {
+                    name: "Python面试50题精讲",
+                    icon: "📝",
+                    type: "PDF",
+                    size: "4.7 MB",
+                    desc: "每题含题目→思路→代码→易错点"
+                },
+            ]
+        },
+        {
+            id: "kaoyan-math-2025",
+            title: "考研数学名师怎么选：张宇 vs 汤家凤 vs 武忠祥 vs 李永乐",
+            category: "考研课程",
+            hot: true,
+            desc: "4 位考研数学名师风格、难度、适合人群全面对比。基础差选谁？想冲高分跟谁？一篇讲清楚",
+            price: 19.9,
+            date: "2025-06-20",
+            keywords: "考研数学跟谁学,张宇和汤家凤哪个好,武忠祥讲得好吗,考研数学老师推荐",
+            freeContent: `
+                <p style="font-size:14px;color:#64748b;margin-bottom:20px;">
+                    ⬆️ 以下为<strong>免费阅读</strong>部分。文末有完整报告的付费下载入口。
+                </p>
+                <h2>一、为什么选对老师很重要</h2>
+                <p>考研数学满分150分，是拉开差距的关键科目。选错老师的代价不是几百块课程费，而是<strong>浪费一整年的复习时间</strong>。每年都有大量考生因为"跟错老师"导致中途换课、节奏被打乱。</p>
+                <p>这篇测评分析了四位主流老师的教学风格、难度、配套资料和适合人群，帮你一次选对。</p>
+
+                <h2>二、四位老师速览</h2>
+                <table>
+                    <tr><th>老师</th><th>风格关键词</th><th>难度</th><th>适合基础</th></tr>
+                    <tr><td><strong>张宇</strong></td><td>幽默风趣、技巧性强、题目偏难</td><td>⭐⭐⭐⭐</td><td>基础较好、目标130+</td></tr>
+                    <tr><td><strong>汤家凤</strong></td><td>踏实细致、板书工整、重视基础</td><td>⭐⭐⭐</td><td>基础薄弱、需要手把手教</td></tr>
+                    <tr><td><strong>武忠祥</strong></td><td>逻辑严密、方法正统、不讲废话</td><td>⭐⭐⭐</td><td>所有基础</td></tr>
+                    <tr><td><strong>李永乐</strong></td><td>线代之王、体系完整、经典永流传</td><td>⭐⭐⭐</td><td>线代必跟</td></tr>
+                </table>
+
+                <h2>三、选师决策树</h2>
+                <div class="highlight-box">
+                    <strong>基础薄弱 → 汤家凤（高数）+ 李永乐（线代）</strong><br>
+                    <strong>基础尚可、想冲高分 → 武忠祥（高数）+ 张宇（强化）</strong><br>
+                    <strong>自律强、喜欢自己刷题 → 武忠祥 + 真题 + 模拟卷</strong><br>
+                    <strong>线代不管选谁，李永乐永远是首选</strong>
+                </div>
+                <p>完整报告还包含：每位老师的<strong>配套资料清单、听课顺序建议、避坑提醒、以及2025最新课程变化分析</strong>。</p>
+            `,
+            premiumFiles: [
+                {
+                    name: "考研数学选师完整测评报告",
+                    icon: "📄", type: "PDF", size: "8.6 MB",
+                    desc: "四位老师逐维度对比 + 听课顺序 + 配套资料清单"
+                },
+                {
+                    name: "2026考研数学全年复习规划表",
+                    icon: "📅", type: "Excel", size: "1.8 MB",
+                    desc: "精确到每周的复习计划，基础→强化→冲刺全覆盖"
+                },
+            ]
+        },
+        {
+            id: "fuye-course-2025",
+            title: "副业课程避坑测评：知乎写作课 vs 生财有术 vs 淘金之路",
+            category: "副业课程",
+            hot: false,
+            desc: "副业培训是割韭菜重灾区。深度拆解三大副业社群的交付质量、真实学员反馈和回本率，帮你过滤掉90%的营销噪音",
+            price: 24.9,
+            date: "2025-06-10",
+            keywords: "副业课是不是割韭菜,搞钱培训哪个靠谱,生财有术值得加入吗,知乎写作课怎么样",
+            freeContent: `
+                <p style="font-size:14px;color:#64748b;margin-bottom:20px;">
+                    ⬆️ 以下为<strong>免费阅读</strong>部分。文末有完整报告的付费下载入口。
+                </p>
+                <h2>一、副业培训为什么是重灾区</h2>
+                <p>副业培训市场规模超过百亿，但信息极度不对称。你交的学费，很多时候买到的只是"网上搜一下就能找到的信息"。</p>
+                <p>这篇测评不靠宣传材料，而是基于<strong>200+ 真实学员的深度访谈</strong>，从交付质量、社群活跃度、真实回本率三个维度拆解三大平台。</p>
+
+                <h2>二、三大平台核心对比</h2>
+                <table>
+                    <tr><th>平台</th><th>年费</th><th>核心价值</th><th>适合谁</th></tr>
+                    <tr><td><strong>知乎写作课</strong></td><td>¥2,980</td><td>教你在知乎写高赞回答引流变现</td><td>有写作基础、想做个人IP</td></tr>
+                    <tr><td><strong>生财有术</strong></td><td>¥2,765/年</td><td>最大的搞钱社群，覆盖几乎所有副业方向</td><td>信息敏感度高、执行力强</td></tr>
+                    <tr><td><strong>淘金之路</strong></td><td>¥1,099/年</td><td>生财的"平民版"，门槛更低</td><td>预算有限、刚开始探索副业</td></tr>
+                </table>
+
+                <div class="highlight-box">
+                    <strong>⚠️ 核心结论：</strong>社群的价值 = 信息差 × 你的执行力。<br>
+                    同样花 ¥2,765 加入生财有术，有人一年赚回 100 倍，有人潜水一年什么都没做。<br>
+                    完整报告告诉你<strong>什么样的人适合加入、什么样的人一定会亏</strong>。
+                </div>
+            `,
+            premiumFiles: [
+                {
+                    name: "副业课程避坑完整测评报告",
+                    icon: "📄", type: "PDF", size: "10.2 MB",
+                    desc: "三大平台逐项对比 + 200+学员真实反馈汇总"
+                },
+                {
+                    name: "2025副业方向自测问卷+推荐路径",
+                    icon: "📋", type: "PDF", size: "2.1 MB",
+                    desc: "10分钟测出最适合你的副业方向"
+                },
+            ]
+        }
+    ];
+
+    /* ============================================================
+       状态管理
+       ============================================================ */
+    let currentPaymentMethod = "qrcode"; // 当前支付方式 (qrcode/demo)
+    let currentReviewId = null;
+    let currentQRType = CONFIG.qrcodeDefault || "wechat"; // 当前显示的收款码
+    let adminToken = null;              // 管理员登录 token
+    let purchases = {};
+
+    // ★ 从 localStorage 恢复购买记录（持久化存储）
+    try {
+        const saved = localStorage.getItem("review_site_purchases");
+        if (saved) purchases = JSON.parse(saved);
+    } catch(e) { /* 解析失败则用空对象 */ }
+
+    /**
+     * 保存购买记录到 localStorage
+     * 这是最简单的持久化方案——数据存在用户浏览器里
+     * 生产环境建议同时写入后端数据库
+     */
+    function savePurchases() {
+        try {
+            localStorage.setItem("review_site_purchases", JSON.stringify(purchases));
+        } catch(e) {
+            console.warn("localStorage 写入失败，可能是存储空间已满", e);
+        }
+    }
+
+    /**
+     * 检查某个测评是否已购买
+     */
+    function hasPurchased(reviewId) {
+        return !!purchases[reviewId];
+    }
+
+    /**
+     * 获取购买数量
+     */
+    function getPurchaseCount() {
+        return Object.keys(purchases).length;
+    }
+
+    /* ============================================================
+       路由系统 —— 基于 URL hash 的简单 SPA 路由
+       支持的 hash：
+         #home       - 首页
+         #review/xxx - 测评详情页
+         #download/xxx - 下载页
+         #purchases  - 已购买列表
+       ============================================================ */
+    function getRoute() {
+        const hash = window.location.hash.slice(1) || "home"; // 去掉开头的 #
+        const [page, param] = hash.split("/");
+        return { page: page || "home", param: param || null };
+    }
+
+    function navigateTo(target) {
+        // target 可以是 "home" 或 "review/python-intro-2025" 等
+        window.location.hash = target;
+    }
+
+    /**
+     * ★★★ 动态 SEO：根据当前页面更新标题、描述、关键词 ★★★
+     * 搜索引擎爬虫渲染页面时会读取这些 meta 标签
+     */
+    function updateSEOMeta(page, param) {
+        const review = param ? REVIEWS.find(r => r.id === param) : null;
+        let title, desc, keywords;
+
+        if (page === "review" && review) {
+            title = review.title + " | 测评导航";
+            desc = review.desc + " 深度横评，多维度对比，免费阅读核心结论，付费下载完整报告。帮你选对课，不花冤枉钱。";
+            keywords = review.keywords + ",测评导航,知识付费测评,课程横评";
+        } else if (page === "home") {
+            title = "测评导航 — 知识付费课程测评 · 帮你选对课";
+            desc = "Python入门课、考研数学、副业课程深度横评，8大维度逐帧拆解。免费阅读核心结论，付费下载完整报告。帮你避开营销陷阱，只选最适合的那一门。";
+            keywords = "Python入门课测评,考研数学老师推荐,副业课程避坑,知识付费测评,课程对比,网课推荐,自学路线";
+        } else {
+            return; // admin/download/waiting 等页面不更新 SEO
+        }
+
+        document.title = title;
+        updateMetaTag("description", desc);
+        updateMetaTag("keywords", keywords);
+        updateMetaTag("og:title", title);
+        updateMetaTag("og:description", desc);
+    }
+
+    /** 更新或创建 meta 标签 */
+    function updateMetaTag(name, content) {
+        let el = document.querySelector("meta[name='" + name + "'], meta[property='" + name + "']");
+        if (!el) {
+            el = document.createElement("meta");
+            el.setAttribute(name.startsWith("og:") ? "property" : "name", name);
+            document.head.appendChild(el);
+        }
+        el.setAttribute("content", content);
+    }
+
+    /**
+     * 根据当前路由渲染页面
+     */
+    function renderRoute() {
+        const { page, param } = getRoute();
+
+        // ★★★ 动态 SEO：根据页面切换标题和描述 ★★★
+        updateSEOMeta(page, param);
+
+        // 隐藏所有页面
+        document.getElementById("home-page").classList.add("hidden");
+        document.getElementById("detail-page").classList.remove("active");
+        document.getElementById("download-page").classList.remove("active");
+        document.getElementById("purchases-page").classList.remove("active");
+
+        switch(page) {
+            case "home":
+                document.getElementById("home-page").classList.remove("hidden");
+                renderHomePage();
+                break;
+            case "review":
+                document.getElementById("detail-page").classList.add("active");
+                renderDetailPage(param);
+                break;
+            case "download":
+                document.getElementById("download-page").classList.add("active");
+                renderDownloadPage(param);
+                break;
+            case "purchases":
+                document.getElementById("purchases-page").classList.add("active");
+                renderPurchasesPage();
+                break;
+            case "waiting":
+                document.getElementById("detail-page").classList.add("active");
+                renderWaitingPage(param);
+                break;
+            case "admin":
+                document.getElementById("detail-page").classList.add("active");
+                renderAdminPage();
+                break;
+            default:
+                navigateTo("home");
+        }
+
+        updatePurchaseBadge();
+    }
+
+    /* ============================================================
+       首页渲染
+       ============================================================ */
+    function renderHomePage() {
+        const listEl = document.getElementById("review-list");
+        listEl.innerHTML = REVIEWS.map(r => `
+            <div class="review-card" onclick="navigateTo('review/${r.id}')">
+                <span class="category${r.hot ? ' hot' : ''}">${r.category}</span>
+                ${r.hot ? ' 🔥' : ''}
+                <h3>${r.title}</h3>
+                <p class="desc">${r.desc}</p>
+                <div class="meta">
+                    <span class="free-tag">免费阅读</span>
+                    <span>完整报告</span>
+                    <span class="price">¥${r.price}</span>
+                    <span>${r.date}</span>
+                </div>
+                <span class="arrow">→</span>
+            </div>
+        `).join("");
+    }
+
+    /* ============================================================
+       详情页渲染
+       ============================================================ */
+    function renderDetailPage(reviewId) {
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review) {
+            navigateTo("home");
+            return;
+        }
+
+        const purchased = hasPurchased(reviewId);
+        const container = document.getElementById("detail-page");
+
+        // 构建付费文件列表 HTML
+        const filesHtml = review.premiumFiles.map((f, i) => `
+            <div class="download-link-item">
+                <div class="file-info">
+                    <span class="file-icon">${f.icon}</span>
+                    <div>
+                        <strong>${f.name}</strong>
+                        <div style="font-size:11px;color:#94a3b8;">${f.type} · ${f.size} · ${f.desc}</div>
+                    </div>
+                </div>
+                ${purchased
+                    ? `<button class="btn-dl" onclick="downloadFile('${review.id}', ${i})">📥 下载</button>`
+                    : '🔒'
+                }
+            </div>
+        `).join("");
+
+        // 付费墙或已购买状态
+        const paywallHtml = purchased ? `
+            <div class="download-card" style="margin:24px 0;text-align:left;">
+                <div style="text-align:center;margin-bottom:16px;">
+                    <div class="success-icon">✅</div>
+                    <h2>你已购买此报告</h2>
+                    <p class="download-info">
+                        购买时间：${purchases[reviewId].date}<br>
+                        以下文件可随时下载
+                    </p>
+                </div>
+                <div class="download-links">${filesHtml}</div>
+                <div style="text-align:center;margin-top:16px;">
+                    <button class="btn-download" onclick="downloadAll('${review.id}')">
+                        📦 一键下载全部文件
+                    </button>
+                </div>
+            </div>
+        ` : `
+            <div class="paywall">
+                <div class="lock-icon">🔐</div>
+                <h2>完整报告 · 付费解锁</h2>
+                <p class="paywall-desc">
+                    以上为免费阅读内容。完整报告包含<strong>8大维度逐帧拆解</strong>、
+                    <strong>隐藏成本曝光</strong>、<strong>真实学员数据</strong>、
+                    <strong>学后变现路径</strong>等独家分析。
+                </p>
+                <div class="paywall-price">¥${review.price} <small>元</small></div>
+                <p class="paywall-guarantee">📧 自动发货 · 即买即得 · ${CONFIG.refundDays}天无理由退款</p>
+                <button class="btn-buy" onclick="openPaymentModal('${review.id}')">
+                    💰 立即购买 · 解锁完整报告
+                </button>
+                <ul class="paywall-features">
+                    ${review.premiumFiles.map(f => `<li>${f.icon} ${f.name}（${f.type} · ${f.size}）</li>`).join("")}
+                </ul>
+            </div>
+        `;
+
+        container.innerHTML = `
+            <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+            <div class="article-header">
+                <span class="category-badge">${review.category}</span>
+                <h1>${review.title}</h1>
+                <p class="article-meta">📅 ${review.date} · 📝 独立测评，不含广告推广</p>
+                ${purchased ? '<p style="color:#16a34a;font-weight:600;margin-top:4px;">✅ 已购买 · 可下载完整报告</p>' : ''}
+            </div>
+            <div class="free-content">${review.freeContent}</div>
+            ${paywallHtml}
+        `;
+
+        // 滚动到顶部
+        window.scrollTo(0, 0);
+    }
+
+    /* ============================================================
+       下载页渲染（购买成功后跳转）
+       ============================================================ */
+    function renderDownloadPage(reviewId) {
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review || !hasPurchased(reviewId)) {
+            navigateTo("home");
+            return;
+        }
+
+        const container = document.getElementById("download-page");
+        const filesHtml = review.premiumFiles.map((f, i) => `
+            <div class="download-link-item">
+                <div class="file-info">
+                    <span class="file-icon">${f.icon}</span>
+                    <div>
+                        <strong>${f.name}</strong>
+                        <div style="font-size:11px;color:#94a3b8;">${f.type} · ${f.size} · ${f.desc}</div>
+                    </div>
+                </div>
+                <button class="btn-dl" onclick="downloadFile('${review.id}', ${i})">📥 下载</button>
+            </div>
+        `).join("");
+
+        container.innerHTML = `
+            <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+            <div class="download-card" style="text-align:left;">
+                <div style="text-align:center;margin-bottom:20px;">
+                    <div class="success-icon">🎉</div>
+                    <h2>购买成功！</h2>
+                    <p class="download-info">
+                        <strong>${review.title}</strong><br>
+                        购买时间：${purchases[reviewId].date}<br>
+                        邮箱：${purchases[reviewId].email}<br>
+                        <span style="color:#16a34a;">📧 下载链接已同时发送到你的邮箱</span>
+                    </p>
+                </div>
+                <div style="text-align:center;margin-bottom:20px;">
+                    <button class="btn-download" onclick="downloadAll('${review.id}')">
+                        📦 一键下载全部文件（共 ${review.premiumFiles.length} 个）
+                    </button>
+                </div>
+                <div class="download-links">
+                    <p style="font-size:13px;color:#64748b;margin-bottom:8px;">或单独下载：</p>
+                    ${filesHtml}
+                </div>
+            </div>
+        `;
+
+        window.scrollTo(0, 0);
+    }
+
+    /* ============================================================
+       已购买列表页
+       ============================================================ */
+    function renderPurchasesPage() {
+        const container = document.getElementById("purchases-page");
+        const purchasedIds = Object.keys(purchases);
+
+        if (purchasedIds.length === 0) {
+            container.innerHTML = `
+                <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h3>还没有购买记录</h3>
+                    <p>去首页看看测评报告吧~</p>
+                    <button class="btn-download" style="margin-top:16px;" onclick="navigateTo('home')">
+                        浏览测评 →
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        const itemsHtml = purchasedIds.map(id => {
+            const review = REVIEWS.find(r => r.id === id);
+            if (!review) return "";
+            return `
+                <div class="purchase-item">
+                    <div class="pi-info">
+                        <h4>${review.title}</h4>
+                        <p class="pi-date">📅 ${purchases[id].date} · 📧 ${purchases[id].email}</p>
+                    </div>
+                    <button class="btn-dl-small" onclick="navigateTo('download/${id}')">
+                        查看下载
+                    </button>
+                </div>
+            `;
+        }).filter(Boolean).join("");
+
+        container.innerHTML = `
+            <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+            <h2>📦 我的订单（${purchasedIds.length}）</h2>
+            ${itemsHtml}
+            <p style="font-size:12px;color:#94a3b8;margin-top:16px;text-align:center;">
+                订单数据存储在本地浏览器中。清除浏览器数据会导致记录丢失。<br>
+                如已丢失，请联系 ${CONFIG.contactEmail}，提供购买邮箱即可恢复。
+            </p>
+        `;
+    }
+
+    /* ============================================================
+       支付弹窗
+       ============================================================ */
+    function openPaymentModal(reviewId) {
+        currentReviewId = reviewId;
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review) return;
+
+        document.getElementById("modal-product-name").textContent = review.title;
+        ["modal-price","modal-price-2"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = review.price;
+        });
+
+        // 根据支付模式显示不同界面
+        const demoSection = document.getElementById("demo-mode-section");
+        const qrSection = document.getElementById("qrcode-mode-section");
+
+        if (CONFIG.paymentMode === "demo") {
+            if (demoSection) demoSection.style.display = "block";
+            if (qrSection) qrSection.style.display = "none";
+        } else {
+            if (demoSection) demoSection.style.display = "none";
+            if (qrSection) qrSection.style.display = "block";
+            switchQR(CONFIG.qrcodeDefault || "wechat");
+        }
+
+        document.getElementById("payment-modal").classList.add("open");
+    }
+
+    function closePaymentModal() {
+        document.getElementById("payment-modal").classList.remove("open");
+        currentReviewId = null;
+    }
+
+    /**
+     * 切换收款码：微信 / 支付宝
+     */
+    function switchQR(type) {
+        currentQRType = type;
+        document.getElementById("tab-wechat").classList.toggle("active", type === "wechat");
+        document.getElementById("tab-alipay").classList.toggle("active", type === "alipay");
+        const img = document.getElementById("qr-image");
+        if (img) {
+            img.src = type === "wechat" ? CONFIG.qrcodeWechat : CONFIG.qrcodeAlipay;
+        }
+    }
+
+    /* ============================================================
+       支付处理
+       ============================================================ */
+
+    /**
+     * 演示模式支付 —— 直接完成购买
+     */
+    function handleDemoPayment() {
+        const email = document.getElementById("demo-email").value.trim();
+        if (!email) { showToast("⚠️ 请输入邮箱地址"); return; }
+        if (!isValidEmail(email)) { showToast("⚠️ 请输入有效的邮箱地址"); return; }
+        completePurchase(currentReviewId, email);
+    }
+
+    /**
+     * 生成随机下载验证 token（用于面包多支付）
+     */
+        /**
+     * 提交订单到 Worker（收款码模式）
+     */
+    function submitOrderToWorker(reviewId, email, txnRef) {
+        const review = REVIEWS.find(r => r.id === reviewId);
+        const orderId = 'ORD' + Date.now().toString(36).toUpperCase();
+        const order = {
+            orderId, reviewId, email,
+            amount: review ? review.price : '29.9',
+            txnRef: txnRef || '', status: 'pending',
+            createdAt: new Date().toISOString(),
+        };
+        let pending = JSON.parse(localStorage.getItem('admin_pending_orders') || '[]');
+        pending.push(order);
+        localStorage.setItem('admin_pending_orders', JSON.stringify(pending));
+        console.log('New order:', orderId, email);
+        return Promise.resolve({ ok: true, orderId, status: 'pending' });
+    }
+
+    /**
+     * 查询订单状态
+     */
+    function checkOrderStatus(orderId) {
+        const confirmed = JSON.parse(localStorage.getItem('admin_confirmed_orders') || '[]');
+        const found = confirmed.find(o => o.orderId === orderId);
+        return Promise.resolve(found ? { status: 'completed' } : { status: 'pending' });
+    }
+
+    /**
+     * 提交支付订单
+     *   demo 模式：直接完成购买
+     *   qrcode 模式：提交订单到 Worker，等待管理员确认
+     */
+    async function handlePayment() {
+        const email = document.getElementById("pay-email").value.trim();
+        if (!email) { showToast("⚠️ 请输入邮箱地址"); return; }
+        if (!isValidEmail(email)) { showToast("⚠️ 请输入有效的邮箱地址"); return; }
+
+        if (CONFIG.paymentMode === "demo") {
+            handleDemoPayment();
+            return;
+        }
+
+        if (CONFIG.paymentMode === "qrcode") {
+            const txnRef = document.getElementById("txn-ref")?.value?.trim() || "";
+            showToast("⏳ 正在提交订单...");
+            const result = await submitOrderToWorker(currentReviewId, email, txnRef);
+            if (!result) { showToast("⚠️ 提交失败，请检查网络"); return; }
+            closePaymentModal();
+            localStorage.setItem("last_pending_order", JSON.stringify({
+                orderId: result.orderId, reviewId: currentReviewId,
+                email, status: "pending", createdAt: new Date().toISOString()
+            }));
+            navigateTo("waiting/" + result.orderId);
+            return;
+        }
+
+        handleDemoPayment();
+    }
+
+    /**
+     * 完成购买（记录购买 + 跳转下载页）
+     * 这是所有支付方式最终都会调用的函数
+     */
+    function completePurchase(reviewId, email) {
+        purchases[reviewId] = {
+            date: new Date().toLocaleString("zh-CN"),
+            email: email,
+        };
+        savePurchases();
+        if (CONFIG.paymentMode === "demo") { sendAutoDeliveryEmail(reviewId, email); }
+        closePaymentModal();
+        showToast("✅ 购买成功！正在跳转下载页...");
+        setTimeout(() => { navigateTo("download/" + reviewId); }, 500);
+    }
+
+    /**
+     * 自动发货 —— 发送邮件
+     * ※ 你需要注册一个邮件服务（如 Resend、SendGrid、Brevo）
+     *    并填入 API Key 来实际发送邮件
+     *
+     * 各大邮件服务对比：
+     * - Resend (resend.com)：免费 100封/天，推荐
+     * - Brevo (brevo.com)：免费 300封/天
+     * - SendGrid (sendgrid.com)：免费 100封/天
+     */
+    function sendAutoDeliveryEmail(reviewId, email) {
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review) return;
+
+        // 构建下载链接（实际部署后替换为你的域名）
+        const downloadUrl = window.location.origin +
+                          window.location.pathname +
+                          "#download/" + reviewId;
+
+        console.log(`
+        ╔══════════════════════════════════════════╗
+        ║  📧 自动发货邮件（模拟发送）            ║
+        ╠══════════════════════════════════════════╣
+        ║  收件人: ${email}
+        ║  主题:   【测评导航】${review.title} - 下载链接
+        ║  下载链接: ${downloadUrl}
+        ║  附件列表: ${review.premiumFiles.length} 个文件
+        ╚══════════════════════════════════════════╝
+        `);
+
+        /* ----------------------------------------------------------
+           ★★★ 真实邮件发送代码示例（以 Resend 为例）★★★
+
+           1. 注册 https://resend.com，获取 API Key
+           2. 将以下代码取消注释并填入你的 API Key
+           3. 替换发件域名
+
+           fetch("https://api.resend.com/emails", {
+               method: "POST",
+               headers: {
+                   "Content-Type": "application/json",
+                   "Authorization": "Bearer re_你的API密钥"
+               },
+               body: JSON.stringify({
+                   from: "测评导航 <noreply@你的域名.com>",
+                   to: email,
+                   subject: `【测评导航】${review.title} - 下载链接`,
+                   html: `
+                       <h2>🎉 购买成功！</h2>
+                       <p>感谢购买《${review.title}》完整测评报告。</p>
+                       <p><a href="${downloadUrl}">点击这里查看和下载</a></p>
+                       <p>或者复制链接到浏览器：${downloadUrl}</p>
+                       <hr>
+                       <p style="color:#999;font-size:12px;">
+                           如未购买请忽略此邮件。<br>
+                           支持${CONFIG.refundDays}天无理由退款。
+                       </p>
+                   `
+               })
+           }).then(r => r.json()).then(console.log).catch(console.error);
+
+           ---------------------------------------------------------- */
+    }
+
+    /* ============================================================
+       文件下载
+       ============================================================ */
+    /**
+     * 下载单个文件
+     * reviewId: 测评ID
+     * fileIndex: 文件在 premiumFiles 数组中的索引
+     *
+     * ★ 实际使用时，你需要：
+     *   1. 将真实文件放在服务器上的 /downloads/ 目录下
+     *   2. 修改 downloadUrl 指向真实文件路径
+     *   3. 或者使用云存储（阿里云OSS、腾讯云COS）的下载链接
+     */
+    function downloadFile(reviewId, fileIndex) {
+        if (!hasPurchased(reviewId)) {
+            showToast("🔐 请先购买后再下载");
+            return;
+        }
+
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review || !review.premiumFiles[fileIndex]) return;
+
+        const file = review.premiumFiles[fileIndex];
+
+        /* ----------------------------------------------------------
+           ★★★ 下载链接配置 ★★★
+           将你的文件放在服务器上，然后修改这里的路径。
+
+           方案1：直接链接（文件放在同目录下）
+           const realFileUrl = `./downloads/${reviewId}/${file.name}.${file.type.toLowerCase()}`;
+
+           方案2：云存储链接（推荐，节省服务器带宽）
+           const realFileUrl = `https://你的云存储域名/${reviewId}/${file.name}.${file.type.toLowerCase()}`;
+
+           方案3：生成一个简单的文本文件作为演示（当前方案）
+           ---------------------------------------------------------- */
+
+        // 当前为演示模式：生成一个模拟的文本文件作为下载内容
+        const demoContent = generateDemoFileContent(review, file);
+
+        // 将内容转为 Blob 并触发下载
+        const blob = new Blob([demoContent], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        // 文件名：测评标题_文件名.类型
+        a.download = `${review.title.slice(0, 20)}_${file.name}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast(`✅ ${file.name} 下载已开始`);
+    }
+
+    /**
+     * 一键下载全部文件
+     * 实际使用中用 ZIP 打包，这里逐个下载
+     */
+    function downloadAll(reviewId) {
+        if (!hasPurchased(reviewId)) {
+            showToast("🔐 请先购买后再下载");
+            return;
+        }
+
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review) return;
+
+        // 逐个触发下载（浏览器可能拦截多个同时下载，所以加延迟）
+        review.premiumFiles.forEach((file, i) => {
+            setTimeout(() => {
+                downloadFile(reviewId, i);
+            }, i * 500);  // 每个文件间隔 500ms
+        });
+
+        showToast(`📦 正在下载全部 ${review.premiumFiles.length} 个文件...`);
+    }
+
+    /**
+     * 生成演示文件内容（实际使用时删除这个函数，替换为真实文件链接）
+     */
+    function generateDemoFileContent(review, file) {
+        return `╔══════════════════════════════════════════════════════╗
+║  ${review.title}
+║  ${file.name}
+╠══════════════════════════════════════════════════════╣
+║
+║  文件类型: ${file.type}
+║  文件大小: ${file.size}
+║  内容说明: ${file.desc}
+║
+║  ─── 这是演示文件 ───
+║
+║  实际使用时，请将真实文件上传到服务器，
+║  并修改 downloadFile() 函数中的 downloadUrl。
+║
+║  推荐文件存储方案：
+║  1. 服务器本地目录（小规模，成本低）
+║  2. 阿里云 OSS / 腾讯云 COS（大规模，速度快）
+║  3. Cloudflare R2（全球加速，免费额度大）
+║
+║  购买信息：
+║  购买时间: ${purchases[review.id]?.date || "未知"}
+║  购买邮箱: ${purchases[review.id]?.email || "未知"}
+║
+║  ${CONFIG.refundDays} 天无理由退款
+║  联系邮箱: ${CONFIG.contactEmail}
+║
+╚══════════════════════════════════════════════════════╝
+`;
+    }
+
+    /* ============================================================
+       工具函数
+       ============================================================ */
+    function showToast(msg) {
+        const toast = document.getElementById("toast");
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2500);
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    /**
+     * 更新导航栏上的购买数量徽章
+     */
+    function updatePurchaseBadge() {
+        const count = getPurchaseCount();
+        document.getElementById("purchase-count").textContent = count;
+    }
+
+    /**
+     * 点击弹窗遮罩关闭弹窗
+     */
+    document.getElementById("payment-modal").addEventListener("click", function(e) {
+        if (e.target === this) closePaymentModal();
+    });
+
+    /* ============================================================
+       监听路由变化
+       ============================================================ */
+    window.addEventListener("hashchange", renderRoute);
+
+    // 点击导航链接时关闭弹窗（如果有的话）
+    document.addEventListener("click", function(e) {
+        const link = e.target.closest("a[href^='#']");
+        if (link) {
+            closePaymentModal();
+        }
+    });
+
+    /* ============================================================
+       等待确认页（用户付款后看到）
+       ============================================================ */
+    function renderWaitingPage(orderId) {
+        const container = document.getElementById("detail-page");
+        container.innerHTML = `
+            <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+            <div class="download-card" style="margin-top:20px;">
+                <div class="success-icon">⏳</div>
+                <h2>订单已提交，等待确认</h2>
+                <p class="download-info">
+                    订单号：<strong>${orderId}</strong><br>
+                    管理员核对到账后，下载链接将发送到你的邮箱。<br>
+                    通常在 <strong>30 分钟内</strong> 完成确认。
+                </p>
+                <div style="background:#f8fafc;border-radius:8px;padding:16px;margin:16px 0;text-align:left;font-size:13px;">
+                    <strong>📌 接下来你可以：</strong><br>
+                    1. 关闭此页面，留意邮箱收件箱<br>
+                    2. <a href="#purchases" onclick="navigateTo('purchases')">查看我的订单</a> 随时关注状态
+                </div>
+                <button class="btn-download" onclick="checkOrderStatusAndRedirect('${orderId}')">
+                    🔄 刷新订单状态
+                </button>
+            </div>
+        `;
+        window.scrollTo(0, 0);
+    }
+
+    async function checkOrderStatusAndRedirect(orderId) {
+        showToast("⏳ 正在查询...");
+        const status = await checkOrderStatus(orderId);
+        if (status && (status.status === "confirmed" || status.status === "completed")) {
+            const pending = JSON.parse(localStorage.getItem("last_pending_order") || "{}");
+            if (pending.reviewId) {
+                completePurchase(pending.reviewId, pending.email);
+                localStorage.removeItem("last_pending_order");
+            }
+        } else if (status && status.status === "pending") {
+            showToast("⏳ 还在等待确认，请稍后再试");
+        } else {
+            showToast("⚠️ 未找到订单，请确认订单号");
+        }
+    }
+
+    /* ============================================================
+       管理后台
+       ============================================================ */
+    function renderAdminPage() {
+        if (!adminToken) {
+            const container = document.getElementById("detail-page");
+            container.innerHTML = `
+                <button class="back-btn" onclick="navigateTo('home')">← 返回首页</button>
+                <div class="admin-login">
+                    <div class="success-icon">🔐</div>
+                    <h2>管理后台</h2>
+                    <input type="password" id="admin-password" placeholder="请输入管理密码">
+                    <button onclick="adminLogin()">登录</button>
+                </div>
+            `;
+            return;
+        }
+        renderAdminOrderList();
+    }
+
+    function adminLogin() {
+        const pw = document.getElementById("admin-password").value;
+        if (pw === CONFIG.adminPassword) {
+            adminToken = 'admin:' + Date.now();
+            localStorage.setItem('admin_token', adminToken);
+            renderAdminOrderList();
+        } else {
+            showToast('❌ 密码错误');
+        }
+    }
+
+    function renderAdminOrderList() {
+        const container = document.getElementById("detail-page");
+        container.innerHTML = '<button class="back-btn" onclick="navigateTo(\'home\')">← 返回首页</button>' +
+            '<h2>📋 订单管理</h2>' +
+            '<p style="font-size:13px;color:#64748b;">已登录 · <a href="#" onclick="adminLogout()">退出</a> · <a href="#" onclick="renderAdminOrderList()">🔄 刷新</a></p>' +
+            '<div id="admin-order-list"></div>' +
+            '<div style="margin-top:12px;padding:12px;background:#f0fdf4;border-radius:8px;font-size:12px;color:#166534;">💡 <strong>使用说明：</strong>用户付款后订单会出现在这里。核对手机到账后点"确认"，会自动打开QQ邮箱发送下载链接。</div>';
+
+        const pending = JSON.parse(localStorage.getItem('admin_pending_orders') || '[]');
+        const confirmed = JSON.parse(localStorage.getItem('admin_confirmed_orders') || '[]');
+        const confirmedIds = confirmed.map(c => c.orderId);
+
+        const seen = new Set();
+        const orders = [...pending, ...confirmed].filter(o => {
+            const k = o.orderId; if (seen.has(k)) return false; seen.add(k); return true;
+        });
+
+        if (orders.length === 0) {
+            document.getElementById('admin-order-list').innerHTML =
+                '<div class="empty-state"><div class="empty-icon">📭</div><h3>暂无订单</h3><p>用户提交订单后会出现在这里</p></div>';
+            return;
+        }
+
+        const badge = o => confirmedIds.includes(o.orderId)
+            ? '<span class="status-badge status-completed">已确认</span>'
+            : '<span class="status-badge status-pending">待确认</span>';
+
+        let html = '<table class="order-table"><tr><th>订单号</th><th>时间</th><th>邮箱</th><th>金额</th><th>状态</th><th>操作</th></tr>';
+        orders.forEach(o => {
+            const isConfirmed = confirmedIds.includes(o.orderId);
+            html += '<tr>' +
+                '<td>' + o.orderId.slice(0,12) + '</td>' +
+                '<td>' + new Date(o.createdAt).toLocaleString('zh-CN') + '</td>' +
+                '<td>' + o.email + '</td>' +
+                '<td>' + o.amount + '</td>' +
+                '<td>' + badge(o) + '</td>' +
+                '<td>' + (isConfirmed ? '✅ 已发' : '<button class="btn-confirm" onclick="adminConfirmOrder(\'' + o.orderId + '\')">✅ 确认</button>') + '</td>' +
+                '</tr>';
+        });
+        html += '</table>';
+        document.getElementById('admin-order-list').innerHTML = html;
+    }
+
+    function adminConfirmOrder(orderId) {
+        const pending = JSON.parse(localStorage.getItem('admin_pending_orders') || '[]');
+        const order = pending.find(o => o.orderId === orderId);
+        if (!order) { showToast('⚠️ 订单未找到'); return; }
+
+        // 从 pending 移到 confirmed
+        let confirmed = JSON.parse(localStorage.getItem('admin_confirmed_orders') || '[]');
+        confirmed.push({ ...order, confirmedAt: new Date().toISOString() });
+        localStorage.setItem('admin_confirmed_orders', JSON.stringify(confirmed));
+
+        // 从 pending 移除
+        localStorage.setItem('admin_pending_orders',
+            JSON.stringify(pending.filter(o => o.orderId !== orderId)));
+
+        const review = REVIEWS.find(r => r.id === order.reviewId);
+        const downloadUrl = window.location.origin + window.location.pathname + '#download/' + (order.reviewId || '');
+        const subject = encodeURIComponent('【测评导航】' + (review ? review.title : '您的测评报告'));
+        const body = encodeURIComponent(
+            '您的订单 ' + orderId + ' 金额 ' + order.amount + ' 已确认到账！\n\n' +
+            '👉 下载链接：' + downloadUrl + '\n\n' +
+            '直接点击链接即可下载完整报告。30天无理由退款。\n\n' +
+            '—— 测评导航'
+        );
+
+        showToast('✅ 已确认，正在打开QQ邮箱...');
+        window.open('mailto:' + order.email + '?subject=' + subject + '&body=' + body, '_blank');
+        setTimeout(() => renderAdminOrderList(), 800);
+    }
+
+    function adminLogout() {
+        adminToken = null;
+        localStorage.removeItem("admin_token");
+        navigateTo("admin");
+    }
+
+    /* ============================================================
+       初始加载
+       ============================================================ */
+    (function init() {
+        const savedToken = localStorage.getItem("admin_token");
+        if (savedToken) adminToken = savedToken;
+        renderRoute();
+        updatePurchaseBadge();
+    })();
+
+    /* ============================================================
+       暴露全局函数（供 HTML onclick 调用）
+       ============================================================ */
+    window.navigateTo = navigateTo;
+    window.openPaymentModal = openPaymentModal;
+    window.closePaymentModal = closePaymentModal;
+    window.switchQR = switchQR;
+    window.handlePayment = handlePayment;
+    window.handleDemoPayment = handleDemoPayment;
+    window.downloadFile = downloadFile;
+    window.downloadAll = downloadAll;
+    window.completePurchase = completePurchase;
+    window.checkOrderStatusAndRedirect = checkOrderStatusAndRedirect;
+    window.adminLogin = adminLogin;
+    window.adminConfirmOrder = adminConfirmOrder;
+    window.adminLogout = adminLogout;
+
+    console.log("✅ 测评导航网站已就绪");
+    console.log("📋 测评数量:", REVIEWS.length);
+    console.log("💳 支付模式:", CONFIG.paymentMode);
+    console.log("📦 已购买:", getPurchaseCount(), "个报告");
+    console.log("📧 邮件: QQ邮箱 mailto");
+    console.log("🔐 管理后台: #admin");
+    console.log("💡 修改 CONFIG 来配置支付模式（demo/qrcode）");
+    console.log("💡 修改 REVIEWS 数组来添加/修改测评内容");
+})();
+</script>
+
+</body>
+</html>
