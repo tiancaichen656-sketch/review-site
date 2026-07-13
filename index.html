@@ -1669,8 +1669,8 @@
         const num = String(fileIndex + 1).padStart(2, "0");
         const isPy = file.name.includes("源码");
         const url = isPy
-            ? "./downloads/" + reviewId + "/05-实战项目源码.py"
-            : "./downloads/" + reviewId + "/" + num + "-" + file.name + ".html";
+            ? "./05-实战项目源码.py"
+            : "./" + num + "-" + file.name + ".html";
         const a = document.createElement("a");
         a.href = url;
         a.download = url.split("/").pop();
