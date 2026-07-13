@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>Python面试50题精讲 | 测评导航</title>
+<style>
+body { font-family: -apple-system,"PingFang SC","Microsoft YaHei",sans-serif; max-width: 750px; margin: 20px auto; padding: 16px; line-height: 1.8; }
+h1 { font-size: 22px; }
+h2 { font-size: 17px; margin: 28px 0 10px; border-bottom: 2px solid #2563eb; padding-bottom: 4px; }
+.q { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+.q h3 { margin: 0 0 8px; font-size: 15px; color: #1e293b; }
+.q p { margin: 4px 0; font-size: 14px; }
+.q .a { color: #16a34a; font-weight: 600; }
+.q .tip { background: #fffbeb; padding: 6px 10px; border-radius: 6px; font-size: 12px; margin-top: 6px; color: #92400e; }
+pre { background: #1e293b; color: #e2e8f0; padding: 10px 14px; border-radius: 6px; overflow-x: auto; font-size: 13px; margin: 6px 0; }
+</style></head>
+<body>
+<h1>Python 面试 50 题精讲</h1>
+<p>每题含：题目→思路→代码→易错点。面试官真正想听什么。</p>
+
+<div class="q"><h3>1. Python 中 list 和 tuple 的区别？</h3>
+<p class="a">答：list 可变（可增删改），tuple 不可变（创建后不能修改）。tuple 可作字典键，list 不能。tuple 内存占用更小、迭代更快。</p>
+<div class="tip">面试官想听：你提到了"可哈希"和"内存效率"，而不是只答"可变/不可变"。</div></div>
+
+<div class="q"><h3>2. 什么是列表推导式？写一个例子。</h3>
+<p class="a">列表推导式是创建列表的简洁语法。<br><code>[x**2 for x in range(10) if x % 2 == 0]</code> → 生成 0-9 中偶数的平方。</p></div>
+
+<div class="q"><h3>3. Python 中 is 和 == 的区别？</h3>
+<p class="a">== 比较值是否相等，is 比较是否同一个对象（内存地址）。小整数 [-5, 256] 会被 Python 缓存，所以 <code>a=256; b=256; a is b</code> 为 True，但 <code>a=257; b=257; a is b</code> 为 False。</p>
+<div class="tip">这是高频题。面试官会用小整数的边界 256/257 来测试你是否真的理解。</div></div>
+
+<div class="q"><h3>4. Python 的垃圾回收机制？</h3>
+<p class="a">① 引用计数为主（引用为 0 立即回收）② 标记清除处理循环引用 ③ 分代回收（0代/1代/2代，新对象在0代，存活越久代数越高，回收频率越低）。</p></div>
+
+<div class="q"><h3>5. 装饰器是什么？写一个计时装饰器。</h3>
+<pre>import time
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        print(f'{func.__name__} 运行了 {time.time()-start:.2f}s')
+        return result
+    return wrapper
+
+@timer
+def slow_func():
+    time.sleep(1)</pre>
+</div>
+
+<div class="q"><h3>6. *args 和 **kwargs 是什么？</h3>
+<p class="a">*args 接收任意数量的位置参数（打包成 tuple），**kwargs 接收任意数量的关键字参数（打包成 dict）。用于函数参数数量不确定时。</p></div>
+
+<div class="q"><h3>7. Python 中深拷贝和浅拷贝的区别？</h3>
+<p class="a">浅拷贝（copy.copy()）只复制对象本身，嵌套对象还是引用。深拷贝（copy.deepcopy()）递归复制所有嵌套对象，完全独立。</p></div>
+
+<div class="q"><h3>8. 解释 Python 的 GIL（全局解释器锁）？</h3>
+<p class="a">GIL 是 CPython 的机制，同一时刻只有一个线程执行 Python 字节码。多线程 CPU 密集型任务无法利用多核。解决方案：多进程（multiprocessing）或 IO 密集型用线程。</p></div>
+
+<div class="q"><h3>9. 如何反转一个字符串？</h3>
+<p class="a"><code>s[::-1]</code> 或 <code>''.join(reversed(s))</code></p></div>
+
+<div class="q"><h3>10. 字典如何按值排序？</h3>
+<p class="a"><code>sorted(d.items(), key=lambda x: x[1], reverse=True)</code></p></div>
+
+<div class="q"><h3>11. Python 的 with 语句有什么用？</h3>
+<p class="a">自动管理资源（文件、锁、连接等），确保使用后正确关闭。背后是 __enter__ 和 __exit__ 魔术方法（上下文管理器）。</p></div>
+
+<div class="q"><h3>12. 如何去除列表中的重复元素并保持顺序？</h3>
+<p class="a"><code>list(dict.fromkeys(mylist))</code>（Python 3.7+ dict 保序）</p></div>
+
+<div class="q"><h3>13. lambda 函数是什么？</h3>
+<p class="a">匿名函数，一行写完。常用于 sorted/map/filter 等需要小函数的场景。<br><code>sorted(students, key=lambda s: s['score'])</code></p></div>
+
+<div class="q"><h3>14. Python 的 pass 语句有什么用？</h3>
+<p class="a">占位符。当语法需要语句但你不想执行任何操作时使用（如空函数体、空类、异常处理中不处理时）。</p></div>
+
+<div class="q"><h3>15. Python 中如何实现单例模式？</h3>
+<pre>class Singleton:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance</pre>
+</div>
+
+<div class="q"><h3>16-50 题速查</h3>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<tr style="background:#f8fafc;"><th>#</th><th>题目</th><th>关键答案</th></tr>
+<tr><td>16</td><td>迭代器和生成器区别？</td><td>生成器用 yield，惰性计算，省内存</td></tr>
+<tr><td>17</td><td>yield 关键字作用？</td><td>创建生成器，逐个返回值而非一次性</td></tr>
+<tr><td>18</td><td>Python 多线程 vs 多进程？</td><td>IO密集用线程，CPU密集用进程</td></tr>
+<tr><td>19</td><td>__init__ 和 __new__ 区别？</td><td>__new__ 创建对象，__init__ 初始化</td></tr>
+<tr><td>20</td><td>Python 中如何读取大文件？</td><td>逐行读取 for line in file，不要 read()</td></tr>
+<tr><td>21</td><td>字符串格式化有哪些方式？</td><td>f"{var}" > str.format() > % 格式化</td></tr>
+<tr><td>22</td><td>闭包是什么？</td><td>内部函数引用外部函数的变量</td></tr>
+<tr><td>23</td><td>Python 的模块搜索路径？</td><td>当前目录 → PYTHONPATH → 标准库 → site-packages</td></tr>
+<tr><td>24</td><td>如何给函数写文档字符串？</td><td>函数内第一行用 """...""" 写 docstring</td></tr>
+<tr><td>25</td><td>enumerate() 的作用？</td><td>遍历时同时获取索引和值</td></tr>
+<tr><td>26</td><td>zip() 的作用？</td><td>将多个可迭代对象按位置打包</td></tr>
+<tr><td>27</td><td>map() 和 filter()？</td><td>map 对每个元素执行函数，filter 筛选</td></tr>
+<tr><td>28</td><td>try/except/finally/else？</td><td>else 在无异常时执行，finally 始终执行</td></tr>
+<tr><td>29</td><td>Python 的 MRO？</td><td>方法解析顺序，C3 线性化，__mro__ 查看</td></tr>
+<tr><td>30</td><td>super() 的作用？</td><td>调用父类方法，MRO 中的下一个类</td></tr>
+<tr><td>31</td><td>@staticmethod vs @classmethod？</td><td>staticmethod 无 self/cls，classmethod 有 cls</td></tr>
+<tr><td>32</td><td>Python 中的鸭子类型？</td><td>关注行为而非类型，"走起来像鸭子就是鸭子"</td></tr>
+<tr><td>33</td><td>__str__ vs __repr__？</td><td>str 给人看（print），repr 给开发者看（调试）</td></tr>
+<tr><td>34</td><td>Python 的包和模块？</td><td>模块是 .py 文件，包是含 __init__.py 的目录</td></tr>
+<tr><td>35</td><td>Python 如何实现多态？</td><td>通过鸭子类型和方法重写，不需要接口</td></tr>
+<tr><td>36</td><td>Python 中如何计时？</td><td>time.time() / time.perf_counter() / timeit</td></tr>
+<tr><td>37</td><td>defaultdict 有什么用？</td><td>访问不存在的键时返回默认值而不报错</td></tr>
+<tr><td>38</td><td>Counter 类的作用？</td><td>统计可迭代对象中元素出现次数</td></tr>
+<tr><td>39</td><td>如何合并两个字典？</td><td>{**d1, **d2} 或 d1 | d2 (Python 3.9+)</td></tr>
+<tr><td>40</td><td>Python 的 walrus operator？</td><td>:= 海象运算符，表达式中赋值 (Python 3.8+)</td></tr>
+<tr><td>41</td><td>什么是协程？</td><td>async/await，单线程内并发，比线程更轻</td></tr>
+<tr><td>42</td><td>Python 如何操作数据库？</td><td>sqlite3 内置，MySQL/PostgreSQL 用第三方</td></tr>
+<tr><td>43</td><td>functools.lru_cache？</td><td>缓存函数结果，避免重复计算</td></tr>
+<tr><td>44</td><td>unittest 基本用法？</td><td>继承 TestCase，方法名以 test_ 开头</td></tr>
+<tr><td>45</td><td>pip freeze 作用？</td><td>导出已安装包列表到 requirements.txt</td></tr>
+<tr><td>46</td><td>虚拟环境 venv 为什么重要？</td><td>项目间依赖隔离，避免版本冲突</td></tr>
+<tr><td>47</td><td>Python 中如何处理 JSON？</td><td>json.loads() 解析，json.dumps() 生成</td></tr>
+<tr><td>48</td><td>re 模块常用函数？</td><td>re.search/match/findall/sub/compile</td></tr>
+<tr><td>49</td><td>Python 如何发送 HTTP 请求？</td><td>requests.get/post，比 urllib 更简洁</td></tr>
+<tr><td>50</td><td>你做过最有挑战的 Python 项目？</td><td>准备 1 个完整项目讲述：问题→方案→结果</td></tr>
+</table></div>
+
+<p style="margin-top:24px;color:#64748b;font-size:12px;">© 测评导航 | tiancaichen656-sketch.github.io/review-site</p>
+</body>
+</html>

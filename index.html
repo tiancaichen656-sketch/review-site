@@ -792,7 +792,7 @@
                 <button class="qr-tab" id="tab-alipay" onclick="switchQR('alipay')">💰 支付宝</button>
             </div>
             <div class="qr-section">
-                <div class="qr-amount">¥<span id="modal-price">29.9</span></div>
+                <div class="qr-amount">¥<span id="modal-price">9.9</span></div>
                 <img id="qr-image" src="" alt="收款码" style="width:200px;height:200px;">
                 <p style="font-size:12px;color:#94a3b8;margin-top:4px;">请保存二维码到手机，用对应App扫码支付</p>
             </div>
@@ -800,7 +800,7 @@
                 <strong>📌 付款步骤：</strong><br>
                 1. 截图或长按保存收款码<br>
                 2. 打开微信/支付宝扫一扫<br>
-                3. 输入上方金额 <strong>¥<span id="modal-price-2">29.9</span></strong><br>
+                3. 输入上方金额 <strong>¥<span id="modal-price-2">9.9</span></strong><br>
                 4. 完成付款后，<strong>复制交易单号</strong>填到下方
             </div>
             <div class="form-group">
@@ -897,7 +897,7 @@
             category: "编程课程",
             hot: true,
             desc: "4 大主流 Python 入门平台深度对比，从教学逻辑、练习体系、答疑社群到隐藏成本，帮你选出最适合零基础的那一门",
-            price: 29.9,
+            price: 9.9,
             date: "2025-07-01",
             keywords: "Python入门课推荐,Python自学选哪个,风变编程怎么样,夜曲编程值得买吗",
             // ========== 免费内容（HTML） ==========
@@ -999,7 +999,7 @@
             category: "考研课程",
             hot: true,
             desc: "4 位考研数学名师风格、难度、适合人群全面对比。基础差选谁？想冲高分跟谁？一篇讲清楚",
-            price: 19.9,
+            price: 9.9,
             date: "2025-06-20",
             keywords: "考研数学跟谁学,张宇和汤家凤哪个好,武忠祥讲得好吗,考研数学老师推荐",
             freeContent: `
@@ -1047,7 +1047,7 @@
             category: "副业课程",
             hot: false,
             desc: "副业培训是割韭菜重灾区。深度拆解三大副业社群的交付质量、真实学员反馈和回本率，帮你过滤掉90%的营销噪音",
-            price: 24.9,
+            price: 9.9,
             date: "2025-06-10",
             keywords: "副业课是不是割韭菜,搞钱培训哪个靠谱,生财有术值得加入吗,知乎写作课怎么样",
             freeContent: `
@@ -1513,7 +1513,7 @@
         const orderId = 'ORD' + Date.now().toString(36).toUpperCase();
         const order = {
             orderId, reviewId, email,
-            amount: review ? review.price : '29.9',
+            amount: review ? review.price : '9.9',
             txnRef: txnRef || '', status: 'pending',
             createdAt: new Date().toISOString(),
         };
@@ -1660,9 +1660,25 @@
      */
     function downloadFile(reviewId, fileIndex) {
         if (!hasPurchased(reviewId)) {
-            showToast("🔐 请先购买后再下载");
+            showToast("需先购买后再下载");
             return;
         }
+        const review = REVIEWS.find(r => r.id === reviewId);
+        if (!review || !review.premiumFiles[fileIndex]) return;
+        const file = review.premiumFiles[fileIndex];
+        const num = String(fileIndex + 1).padStart(2, "0");
+        const isPy = file.name.includes("源码");
+        const url = isPy
+            ? "./downloads/" + reviewId + "/05-实战项目源码.py"
+            : "./downloads/" + reviewId + "/" + num + "-" + file.name + ".html";
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = url.split("/").pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast("下载已开始: " + file.name);
+    }
 
         const review = REVIEWS.find(r => r.id === reviewId);
         if (!review || !review.premiumFiles[fileIndex]) return;
@@ -1938,7 +1954,7 @@
         const downloadUrl = window.location.origin + window.location.pathname + '#download/' + (order.reviewId || '');
         const subject = encodeURIComponent('【测评导航】' + (review ? review.title : '您的测评报告'));
         const body = encodeURIComponent(
-            '您的订单 ' + orderId + ' 金额 ' + order.amount + ' 已确认到账！\n\n' +
+            '您的订单 ' + orderId + ' (¥' + order.amount + ') 已确认！下载: ' + downloadUrl\n\n' +
             '👉 下载链接：' + downloadUrl + '\n\n' +
             '直接点击链接即可下载完整报告。30天无理由退款。\n\n' +
             '—— 测评导航'
